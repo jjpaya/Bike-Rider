@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
       hmr: {
-          port: 80
+          clientPort: 80
       }
   }
 })
