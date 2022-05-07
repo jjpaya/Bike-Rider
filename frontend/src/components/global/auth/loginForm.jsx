@@ -71,7 +71,7 @@ const LoginForm = ({ close, stationLogin = false }) => {
               getter={password}
               setter={setPassword}
               rules={[rules.required]}
-             // onKeyDown={(e) => { if (e.key == 'Enter') handleSubmit() }}
+              onKeyDown={(e) => { if (e.key == 'Enter' && !isLoading) handleSubmit() }}
             />
             <Button
               disabled={isLoading}
