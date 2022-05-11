@@ -20,7 +20,7 @@ class IsMaintainerBike(permissions.BasePermission):
             ).exists()
 
             return bike
-            
+
         except Exception as e:
             return False
 
@@ -39,6 +39,6 @@ class NotActiveTravels(permissions.BasePermission):
             ).exists()
             pprint(travel)
             return travel == False
-            
+
         except Exception as e:
             return False

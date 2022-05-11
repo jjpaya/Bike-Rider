@@ -10,7 +10,10 @@ export const PaymentPage = () => {
   const { refresh } = useAuth();
 
   React.useEffect(() => {
-    refresh();
+    setTimeout(() => {
+      // wait for balance update
+      refresh();
+    }, 500);
   }, []);
 
   const handleClick = () => {

@@ -60,10 +60,14 @@ export default function useStationAuth() {
     try {
       await bikesService.unhook(id)
       if(Object.keys(reservation).length > 0) cancelReservation();
-      addToast({msg: 'Have a nice ride!!', type: 'success'})
+      addToast({msg: 'Have a nice ride!!', type: 'success'});
       logout();
     } catch (e) {
-      console.error(e);
+      try {
+        var data = JSON.parse(e.request.responseText);
+        addToast({msg: data?.detail || 'Error', type: 'error'});
+      } catch (e) { }
+      console.error({e});
     }
   }
 

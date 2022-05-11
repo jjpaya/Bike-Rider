@@ -7,6 +7,7 @@ from .models import Bike
 from .permissions import IsMaintainerBike, NotActiveTravels
 from bike_rider.apps.core.permissions import IsMaintenanceUsr, IsStation, IsAdminUsr
 from rest_framework.permissions import IsAuthenticated
+from ..payments.permissions import HasPositiveBalance
 
 class BikeHookViewSet(mixins.UpdateModelMixin, viewsets.GenericViewSet):
     serializer_class = BikeHookSerializer
@@ -16,7 +17,7 @@ class BikeHookViewSet(mixins.UpdateModelMixin, viewsets.GenericViewSet):
         if (self.request.path.startswith("/api/bikes/hook/")):
             self.permission_classes = [IsStation]
         else :
-            self.permission_classes = [IsStation, IsAuthenticated, NotActiveTravels]
+            self.permission_classes = [IsStation, IsAuthenticated, NotActiveTravels, HasPositiveBalance]
         return [permission() for permission in self.permission_classes]
 
     def update(self, request, *args, **kwargs):
@@ -44,7 +45,7 @@ class ChangeBikeStatusViewSet(mixins.UpdateModelMixin, viewsets.GenericViewSet):
         serializer_data = request.data
         serializer = self.serializer_class(
             bike,
-            data=serializer_data, 
+            data=serializer_data,
             partial=True
         )
         serializer.is_valid(raise_exception=True)

@@ -6,15 +6,16 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import Response
 from rest_framework import exceptions
 from django.utils import timezone
+from ..payments.permissions import HasPositiveBalance
 
 class BookingViewSet(mixins.CreateModelMixin, mixins.DestroyModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     queryset = Booking.objects.all()
     serializer_class = BookingSerializer
-    
+
     def get_permissions(self):
-        
+
         if self.action == 'create':
-            permission_classes = [IsAuthenticated, HasNotBooking]
+            permission_classes = [IsAuthenticated, HasNotBooking, HasPositiveBalance]
         else:
             permission_classes = [IsAuthenticated, HasBooking]
         return [permission() for permission in permission_classes]

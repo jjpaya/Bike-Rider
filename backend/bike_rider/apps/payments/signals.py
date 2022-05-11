@@ -13,8 +13,8 @@ def update_user_balance_s_payment(sender, instance, *args, **kwargs):
     update_user_balance(sender, instance)
 
 @receiver(post_save, sender=Charge)
-def update_user_balance_s_payment(sender, instance, *args, **kwargs):
-    if not (instance and instance.confirmed):
+def update_user_balance_s_charge(sender, instance, *args, **kwargs):
+    if not (instance):
         return
 
     update_user_balance(sender, instance)

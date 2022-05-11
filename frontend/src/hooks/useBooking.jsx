@@ -1,12 +1,18 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
 import UserContext from '../context/user';
 import * as bookingService from '../services/bookings';
+import useToast from './useToast';
 
 export default function useBooking() {
   const { reservation, setReservation } = useContext(UserContext)
   const [state, setState] = useState({ loading: false, error: false })
+  const addToast = useToast();
 
   const changeState = (msg, bool) => {
+    if (msg) {
+      addToast({msg: (msg?.Fail||[''])[0] || 'Error', type: 'error'});
+    }
+
     setState({ loading: false, error: msg });
     return bool;
   }

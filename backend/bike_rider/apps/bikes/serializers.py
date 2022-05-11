@@ -8,6 +8,7 @@ from bike_rider.apps.bstations.models import BStation
 from django.utils import timezone
 from rest_framework.exceptions import NotAcceptable
 from .relation import TicketRelatedField
+from ..payments.models import Charge
 
 class BikeSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(read_only=True)
@@ -68,6 +69,26 @@ class BikeHookSerializer(BikeSerializer):
         travel.destination = station
         travel.save()
         instance.save()
+
+        diff = travel.finish - travel.start
+        elapsed_secs = diff.seconds
+
+        rate = 0.05
+        if travel.user.subscription is not None:
+            elapsed_secs -= travel.user.subscription.min_minutes * 60
+            rate = travel.user.subscription.cent_minute / 100
+
+        travel_total_eur_cent = rate * elapsed_secs
+
+        if elapsed_secs <= 0 or travel_total_eur_cent <= 0:
+            return
+
+        Charge.objects.create(
+            reason='travel',
+            total_eur_cent=travel_total_eur_cent,
+            user=travel.user
+        )
+
 
     def unhook(self, instance, context):
         if not instance.station:
