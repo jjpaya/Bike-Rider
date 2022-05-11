@@ -64,6 +64,8 @@ class User(AbstractBaseUser, PermissionsMixin, TimestampedModel):
     subscription = models.ForeignKey(Subscription, related_name='user', on_delete=models.CASCADE, default=None, blank=True, null=True)
     free_minutes = models.IntegerField(default=0)
 
+    balance_eur_cent = models.IntegerField(default=0, null=False)
+
     USERNAME_FIELD = 'dni'
     REQUIRED_FIELDS = ['email', 'role']
     objects = UserManager()

@@ -13,7 +13,7 @@ function Counter({ date = null, timeUp, width, height, text }) {
     const endDate = new Date(date).getTime();
     const timer = () => {
       const now = new Date();
-      now.setHours(now.getHours() - 1);
+      now.setHours(now.getHours() + now.getTimezoneOffset() / 2);
       const remainingTime = endDate - now.getTime();
       const second = 1000;
       const minute = second * 60;

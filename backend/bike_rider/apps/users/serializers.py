@@ -30,13 +30,15 @@ class ThumbnailSerializer(serializers.ModelSerializer):
 class SessionSerializer(ThumbnailSerializer):
     role = serializers.CharField(read_only=True)
     subscription = SubscriptionSerializer(read_only=True)
+    balance_eur_cent = serializers.IntegerField(read_only=True)
+
     class Meta:
         model = User
-        fields = ['role', 'subscription', 'dni', 'email', 'image']
+        fields = ['role', 'subscription', 'dni', 'email', 'image', 'balance_eur_cent']
 
 class UserRegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, style={'input_type': 'password'})
-    
+
     class Meta:
         model = User
         fields = ['dni', 'email', 'password']

@@ -5,7 +5,7 @@ services:
     container_name: "br_db"
     env_file:
       - .env
-      - config/private/${ENV:-dev}/secrets.env 
+      - config/private/${ENV:-dev}/secrets.env
 
   br_db_admin:
     image: dpage/pgadmin4
@@ -68,5 +68,19 @@ services:
       - .env
       - config/private/${ENV:-dev}/secrets.env
       - config/private/${ENV:-dev}/super-secrets.env
+      - config/private/${ENV:-dev}/stripe.env
     depends_on:
       - br_db
+
+  br_stripe_dev_webhooks:
+    container_name: "br_stripe_dev_webhooks"
+    image: stripe/stripe-cli
+    entrypoint: /start.sh
+    command: listen --forward-to br_web:80/api/payments/webhook/
+    volumes:
+      - ./config/scripts/start-stripe-wh.sh:/start.sh:ro
+      - ./config/private/dev/stripe_webhook:/mnt:rw
+    env_file:
+      - config/private/${ENV:-dev}/stripe.env
+    depends_on:
+      - br_web

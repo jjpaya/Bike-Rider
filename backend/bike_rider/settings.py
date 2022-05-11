@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 import os
 import datetime
 
+DOMAIN_URL = os.environ.get('BASE_URL', None)
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MEDIA_ROOT = '/app_data/'
@@ -28,8 +30,8 @@ EMAIL_HOST_USER = os.environ.get('BR_MAIL_USER', None)
 EMAIL_HOST_PASSWORD = os.environ.get('BR_MAIL_PASS', None)
 EMAIL_TIMEOUT = 10
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
+STRIPE_PRIVATE_KEY = os.environ.get('STRIPE_API_KEY', None)
+STRIPE_ENDPOINT_SECRET = os.environ.get('STRIPE_ENDPOINT_SECRET', None)
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'test')
@@ -37,10 +39,12 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'test')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('ENV', None) != 'prod'
 
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = [os.environ.get('BASE_DOMAIN', 'localhost')]
+
+if os.environ.get('ENV', None) != 'prod':
+    ALLOWED_HOSTS = ['*']
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -59,7 +63,8 @@ INSTALLED_APPS = [
     'bike_rider.apps.users',
     'bike_rider.apps.travels',
     'bike_rider.apps.tickets',
-    'bike_rider.apps.coupons'
+    'bike_rider.apps.coupons',
+    'bike_rider.apps.payments'
 ]
 
 MIDDLEWARE = [
@@ -134,13 +139,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = False
 
 # Static files (CSS, JavaScript, Images)

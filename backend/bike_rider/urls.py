@@ -11,5 +11,6 @@ urlpatterns = [
     path('api/', include('bike_rider.apps.bikes.urls')),
     path('api/', include('bike_rider.apps.tickets.urls')),
     path('api/', include('bike_rider.apps.coupons.urls')),
+    path('api/', include('bike_rider.apps.payments.urls')),
     path('api/auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]

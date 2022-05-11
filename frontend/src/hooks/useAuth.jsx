@@ -5,7 +5,7 @@ import { getCookieJson, watchCookies } from '/src/utils/cookie';
 import { deepEqual } from '/src/utils/misc';
 
 export default function useAuth() {
-  const { session, setSession} = useContext(UserContext)
+  const { session, setSession } = useContext(UserContext)
   const [state, setState] = useState({ loading: false, error: false })
   const isMounted = useRef(false);
 
@@ -102,6 +102,7 @@ export default function useAuth() {
     hasError: state.error,
     image: session?.image,
     dni: session?.dni,
+    balance_eur_cent: session?.balance_eur_cent,
     login,
     logout,
     register,

@@ -9,6 +9,7 @@ import { isStation } from "../guards/station";
 import { ModalContextProvider } from "../context/modal";
 import { CircularProgress } from "@mui/material";
 import { LegalContextProvider } from "../context/legal";
+import { PaymentPage } from "../pages/payment";
 
 const WebLayout = React.lazy(() => import("../layout/web"));
 const WebPage = React.lazy(() => import("../pages/web"));
@@ -29,6 +30,7 @@ const RouterView = () => {
 
           <Route path="" element={<WebLayout />}>
             <Route index element={<WebPage />} />
+            <Route path="payment" element={<PaymentPage />} />
           </Route>
 
           <Route path="panel" element={

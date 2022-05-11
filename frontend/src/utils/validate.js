@@ -28,6 +28,6 @@ export const rules = {
   minLength: (minLength) => (value) => (value && value.length >= minLength) || `Min length ${minLength}`,
   maxLength: (maxLength) => (value) => (value && value.length <= maxLength) || `Max length ${maxLength}`,
   dni: (value) => validate_dni(value) || 'Invalid dni',
-  coupon: (value) => (/^[0-9A-Z]{8}$/.test(value)) || 'Invalid coupon'
+  coupon: (value) => (/^[0-9A-Z]{8}$/.test(value)) || 'Invalid coupon',
+  buyAmount: (value) => +value && value >= 1 && value <= 500 || 'Please enter an amount between 1 and 500'
 };
-

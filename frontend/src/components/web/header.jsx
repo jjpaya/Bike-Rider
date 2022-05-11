@@ -11,14 +11,15 @@ import {
 import LoginForm from '../global/auth/loginForm';
 import WebMenu from './menu';
 import UserThumbnail from './thumbnail';
-import useAuth from '/src/hooks/useAuth';
+import useAuth from '../../hooks/useAuth';
 import useBooking from '../../hooks/useBooking';
 import useModal from '/src/hooks/useModal';
 import useToast from '/src/hooks/useToast';
 import { useLegal } from '/src/hooks/useLegal';
+import { Balance } from '../global/balance';
 
 const WebHeader = () => {
-  const { isLogged, logout, image, dni } = useAuth();
+  const { isLogged, logout, image, dni, balance_eur_cent } = useAuth();
   const { getReservation } = useBooking();
   const { cookiesAccepted } = useLegal();
   const openCustomModal = useModal();
@@ -44,12 +45,18 @@ const WebHeader = () => {
               </IconButton>
             </Box>
             :
-            <UserThumbnail
-              logout={logout}
-              reservation={getReservation}
-              dni={dni}
-              image={image}
-            />
+            <Box sx={{display: 'flex'}}>
+              <Balance
+                bal={balance_eur_cent}
+                sx={{mr: 1}}
+              />
+              <UserThumbnail
+                logout={logout}
+                reservation={getReservation}
+                dni={dni}
+                image={image}
+              />
+            </Box>
           }
         </Toolbar>
       </Container>
