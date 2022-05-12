@@ -53,7 +53,7 @@ const BalancePopup = ({ bal, enableBuying = true }) => {
               <Typography fontWeight={"bold"}>Price:</Typography>
             </TableCell>
             <TableCell>
-              {subscription?.min_minute && <Typography>
+              {subscription?.min_minutes && <Typography>
                 {('' + subscription?.min_minutes).substring(3)}h FREE,
               </Typography>}
               <Typography fontSize={14}>
