@@ -80,7 +80,7 @@ class BikeHookSerializer(BikeSerializer):
 
         travel_total_eur_cent = rate * elapsed_secs
 
-        if elapsed_secs <= 0 or travel_total_eur_cent <= 0:
+        if elapsed_secs <= 0 or int(travel_total_eur_cent) <= 0:
             return
 
         Charge.objects.create(
