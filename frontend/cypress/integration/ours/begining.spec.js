@@ -1,5 +1,5 @@
 /// <reference types="cypress" />
-describe('beging', () => {
+describe('beginning', () => {
     beforeEach(() => {
         cy.visit('/')
     })
@@ -12,7 +12,7 @@ describe('beging', () => {
         cy.get('[aria-label="Zoom in"]')
     })
 
-    it('Should have a logo Text', () => {
-        cy.get('.css-1083xa6-MuiTypography-root')
+    it('Should have the app logo image', () => {
+        cy.get('.css-1r00tlo')
     })
 })
