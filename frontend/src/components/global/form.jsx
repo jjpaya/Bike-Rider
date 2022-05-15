@@ -1,5 +1,8 @@
-import { FormControl, FormControlLabel, FormGroup, FormHelperText } from "@mui/material";
+import { Checkbox, FormControl, FormControlLabel, FormGroup, FormHelperText, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
+
+const typeTextField = (<TextField/>).type;
+const typeCheckbox = (<Checkbox/>).type;
 
 let onSubmit = () => { };
 
@@ -43,7 +46,7 @@ const Form = ({ children }) => {
           }}>{c.props.children}</c.type>
         }
 
-        if (c.type?.render?.name == 'TextField2') {
+        if (c.type === typeTextField) {
           const err = renderErr ? validate(c) : false;
           if (err) errList.push(err);
           return <c.type
@@ -58,7 +61,7 @@ const Form = ({ children }) => {
             })} >
             {c.props.children && errorWraper(c.props.children, renderErr)}
           </c.type>
-        } else if (c.type?.render?.name == 'Checkbox2') {
+        } else if (c.type === typeCheckbox) {
           const err = renderErr ? (c.props.required && !c.props.getter) : undefined;
           if (err) errList.push('Required checkbox');
           return <FormControlLabel sx={err && {color: 'red'}} label={c.props.label} control={

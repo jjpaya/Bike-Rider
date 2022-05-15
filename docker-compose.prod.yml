@@ -5,8 +5,8 @@ services:
     container_name: "br_db"
     env_file:
       - .env
-      - config/private/prod/secrets.env 
-      
+      - config/private/prod/secrets.env
+
   br_server:
     build:
       context: ./
@@ -34,4 +34,3 @@ services:
       - ./data:/app_data
     depends_on:
       - br_server
-

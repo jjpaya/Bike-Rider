@@ -13,6 +13,8 @@ import useAuth from '/src/hooks/useAuth';
 import useModal from '/src/hooks/useModal';
 import ticketForm from '../global/tickets/ticketForm';
 
+import logoImg from '/src/logo-grey.png';
+
 const WebMenu = () => {
 
   const navigate = useNavigate();
@@ -50,7 +52,7 @@ const WebMenu = () => {
         component="img"
         sx={{ mr: 2, height: 50, display: { xs: 'none', md: 'flex' } }}
         alt="BikeRider"
-        src="/src/logo-grey.png"
+        src={logoImg}
         draggable="false"
       />
       <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -97,7 +99,7 @@ const WebMenu = () => {
           component="img"
           sx={{ height: 50, display: { xs: 'flex', md: 'none' } }}
           alt="BikeRider"
-          src="/src/logo-grey.png"
+          src={logoImg}
           draggable="false"
         />
       </Box>
