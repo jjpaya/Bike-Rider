@@ -50,6 +50,7 @@ class BStationSerializer(serializers.ModelSerializer):
     av_bike_ct = serializers.IntegerField(read_only=True)
     bk_bike_ct = serializers.IntegerField(read_only=True)
     bookings = BookingBStationSerializer(read_only=True, many=True)
+    image = serializers.CharField(allow_blank=True, required=False, read_only=True)
 
     maint_ticket_ct = serializers.IntegerField(read_only=True, required=False)
 
@@ -70,6 +71,7 @@ class BStationMaintenanceSerializer(serializers.ModelSerializer):
     maintainer = ThumbnailSerializer()
     maintenance_ticket = TicketRelatedField(many=True, read_only=True)
     bike = BikeRelatedField(many=True, read_only=True)
+    image = serializers.CharField(allow_blank=True, required=False, read_only=True)
     # serializers.PrimaryKeyRelatedField(source='bike', read_only=True)
 
     class Meta:

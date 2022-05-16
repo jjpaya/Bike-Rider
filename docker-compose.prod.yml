@@ -18,6 +18,7 @@ services:
     env_file:
       - .env
       - config/private/prod/secrets.env
+      - config/private/prod/stripe.env
       - config/private/prod/super-secrets.env
     depends_on:
       - br_db

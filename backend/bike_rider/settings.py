@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 import os
 import datetime
 
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = os.environ.get('ENV', None) != 'prod'
+
 DOMAIN_URL = os.environ.get('BASE_URL', None)
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -21,8 +24,11 @@ MEDIA_ROOT = '/app_data/'
 MEDIA_URL = '/api/data/'
 
 EMAIL_USE_TLS = True
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
 EMAIL_HOST = os.environ.get('BR_MAIL_HOST', None)
 EMAIL_PORT = os.environ.get('BR_MAIL_PORT', None)
 EMAIL_SENDER_NAME = os.environ.get('BR_MAIL_NAME', None)
@@ -36,13 +42,13 @@ STRIPE_ENDPOINT_SECRET = os.environ.get('STRIPE_ENDPOINT_SECRET', None)
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'test')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('ENV', None) != 'prod'
 
 ALLOWED_HOSTS = [os.environ.get('BASE_DOMAIN', 'localhost')]
 
 if os.environ.get('ENV', None) != 'prod':
     ALLOWED_HOSTS = ['*']
+else:
+    CSRF_TRUSTED_ORIGINS = ['http://' + os.environ.get('BASE_DOMAIN', 'localhost'), os.environ.get('BASE_URL', None)]
 
 # Application definition
 INSTALLED_APPS = [

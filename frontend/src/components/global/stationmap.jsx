@@ -114,7 +114,7 @@ const StationClientInfoWindow = ({ station, closeCb }) => {
     >
       <Box sx={{ display: 'flex' }}>
         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-          <img style={{ maxWidth: '20vmin', margin: 'auto' }} src={station.image} alt={`Station ${station.id}`} title={`Station ${station.id}`} />
+          <img style={{ maxWidth: '20vmin', margin: 'auto' }} src={`/api/data/${station.image}`} alt={`Station ${station.id}`} title={`Station ${station.id}`} />
           <h2>{station.name}</h2>
           {station.dist >= 0 && <div>Distance from center of circle: {station.dist.toFixed(2)} km</div>}
           <div>Available bikes: {station.av_bike_ct}</div>
@@ -142,7 +142,7 @@ const StationMaintainerInfoWindow = ({ station, closeCb }) => {
     >
       <Box sx={{ display: 'flex' }}>
         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-          <img style={{ maxWidth: '20vmin', margin: 'auto' }} src={station.image} alt={`Station ${station.id}`} title={`Station ${station.id}`} />
+          <img style={{ maxWidth: '20vmin', margin: 'auto' }} src={`/api/data/${station.image}`} alt={`Station ${station.id}`} title={`Station ${station.id}`} />
         </Box>
         <Box sx={{ display: 'flex', ml: 2, mb: 2, flexDirection: 'column' }}>
           <h2>Station Info:</h2>
