@@ -48,7 +48,7 @@ And the document explaining the design of the application can be read here:
 ## Web
 | SECTION | FEATURES |
 | - | - |
-| Header |  Nav menu with all the pages. It will show menu links and ticket if you are logged into the web, if you aren't, only login button will be shown.|
+| Header |  Nav menu with all the pages. It will show menu links, ticket and your available balance if you are logged into the web, if you aren't, only login button will be shown.|
 | Main | This will contain a map with pins and a circumference to search stations|
 
 > This section is the same in all the pages, except on Panel, Station and Admin that will disappear
@@ -58,6 +58,7 @@ And the document explaining the design of the application can be read here:
 | - | - |
 | Ticket | Open a modal with a form to send tickets. |
 | Menu Links | It will have all links to Panel ( If a user is log and have role SUPPORT O MAINTAINER ) or Admin (If a user is log and have role ). |
+| User Balance | This button shows your available balance. If you click it, a window with more details about your billing conditions are shown, there is also a button to buy more credit with Stripe. |
 | Login | You have to click the button you can login or sign up . |
 | Thumbnail | A menu to see your reservation, to change and see your subscription, another to use coupons and finally to logout. |
 ***
@@ -94,7 +95,7 @@ And the document explaining the design of the application can be read here:
 ## Station
 | Section | Features |
 | - | - |
-| Header | Once your log into the totem, you will see 2 buttons, to send a issue or logout and the name of the station. If your not log you only will see the name. |
+| Header | Once your log into the totem, you will see the name of the station and 3 buttons: your balance, a button to send an issue and a button to log out. If your not logged in you only will see the station name. |
 | Main Screen | You will have the the login if is't a user log, but if is log it will show all the slots of the station, with the status of the bike and if they have a reservation. If the station isn't configure, will show a page to send the token. |
 | Hardware Panel | You can hook the bikes and only if the slot is empty. |
 
